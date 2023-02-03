@@ -64,7 +64,7 @@ export default function FormCategory() {
         "comission": comission
     }
     console.log(data);
-    const response = await postDatas("http://localhost:9000/category", data);
+    const response = await postDatas("https://api-production-6a5a.up.railway.app/category", data);
     if(response.data){
       navigate("/categories");
     }else{

@@ -1,24 +1,10 @@
-import React, { useEffect } from "react";
-
 import "jquery/dist/jquery.min.js";
 
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-import $ from "jquery";
 
 export default function AuctionMoney(props) {
   const moneyAuctions = props.moneyAuctions;
-
-  useEffect(() => {
-    $(function () {
-      $("#auctionMoney").DataTable({
-        responsive: true,
-        lengthChange: false,
-        autoWidth: false,
-        // bDestroy : true
-      });
-    });
-  });
 
   return (
     <div className="card card-info">
@@ -43,7 +29,7 @@ export default function AuctionMoney(props) {
             {moneyAuctions?.map((moneyAuction, index) => {
               return (
                 <tr key={index}>
-                  <td>{moneyAuction.auction.reference}</td>
+                  <td>{moneyAuction.auction.id}</td>
                   <td>{moneyAuction.auction.productName}</td>
                   <td>{moneyAuction.winningClient.firstName} {moneyAuction.winningClient.lastName}</td>
                   <td>{moneyAuction.ownerClient.firstName} {moneyAuction.ownerClient.lastName}</td>

@@ -28,7 +28,7 @@ const Login = () => {
       email: email,
       password: pwd,
     };
-    fetch("http://localhost:9000/login", {
+    fetch("https://api-production-6a5a.up.railway.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

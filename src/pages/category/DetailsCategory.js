@@ -8,11 +8,11 @@ export default function DetailsCategory() {
   const [categoryDetails, setCategoryDetails] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:9000/category/"+id)
+    fetch("https://api-production-6a5a.up.railway.app/category/"+id)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setCategory(data);
+        setCategory(data.data);
       })
       .catch((error) => {
         //TODO implement error
@@ -25,7 +25,7 @@ export default function DetailsCategory() {
     const data = {
       name: categoryDetails
     };
-    fetch("http://localhost:9000/category/"+id+"/details", {
+    fetch("https://api-production-6a5a.up.railway.app/category/"+id+"/details", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,15 +75,6 @@ export default function DetailsCategory() {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="reference" className="col-sm-6 col-form-label">
-                  Reference :
-                </label>
-                <div className="col-sm-6">
-                  <span id="reference"> {category.reference} </span>
-                </div>
-              </div>
-
-              <div className="form-group row">
                 <label htmlFor="comission" className="col-sm-6 col-form-label">
                   Comission :
                 </label>
@@ -115,64 +106,6 @@ export default function DetailsCategory() {
                   <span id="max_duration"> {category.name} </span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="row form-category">
-            {/* Formulaire category deails */}
-            <div className="col-md-5">
-              <h6>Add category details</h6>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group row">
-                  <label
-                    htmlFor="name-details"
-                    className="col-sm-6 col-form-label"
-                  >
-                    Name :
-                  </label>
-                  <div className="col-sm-6">
-                    <input
-                      value = {categoryDetails}
-                      onChange={(event) => setCategoryDetails(event.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="name-details"
-                      placeholder="Name"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <input
-                    type="submit"
-                    className="btn btn-info"
-                    value="Create"
-                  />
-                </div>
-              </form>
-            </div>
-
-            <div className="col-md-2"></div>
-
-            {/* List category details */}
-            <div className="col-md-5">
-              <h6>List of category details</h6>
-              <table className="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {category.details?.map((categoryDetail, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{categoryDetail.name}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
             </div>
           </div>
         </div>

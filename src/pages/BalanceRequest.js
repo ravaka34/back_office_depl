@@ -6,26 +6,18 @@ import "jquery/dist/jquery.min.js";
 
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-import $ from "jquery";
 import Question from "../components/balance-request/Question";
 
 export default function BalanceRequest() {
   const [balanceRequests, setBalanceRequests] = useState();
 
   useEffect(() => {
-    // $(function () {
-    //   $("#example1").DataTable({
-    //     responsive: true,
-    //     lengthChange: false,
-    //     autoWidth: false,
-    //   });
-    // });
 
-    fetch("http://localhost:9000/balance/load-request")
+    fetch("https://api-production-6a5a.up.railway.app/balance/load-request")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setBalanceRequests(data);
+        setBalanceRequests(data.data);
       })
       .catch((error) => {
         //TODO implement error

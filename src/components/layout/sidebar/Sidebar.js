@@ -21,34 +21,25 @@ export default function Sidebar() {
             data-accordion="false"
           >
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                {/* <i className="nav-icon fas fa-chart-pie"></i> */}
-                <p>
-                  Categories
-                  <i className="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul className="nav ">
-                <li className="nav-item">
-                  <Link to="/categories" className="nav-link">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>List</p>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/create-categories" className="nav-link">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Create</p>
-                  </Link>
-                </li>
-              </ul>
+              <li className="nav-item">
+                <Link to="/categories" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>List Categories</p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/create-categories" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Create Category</p>
+                </Link>
+              </li>
             </li>
             <li className="nav-item">
-                  <Link to="/balance-requests" className="nav-link">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Load balance request</p>
-                  </Link>
-                </li>
+              <Link to="/balance-requests" className="nav-link">
+                <i className="far fa-circle nav-icon"></i>
+                <p>Load balance request</p>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

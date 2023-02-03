@@ -3,10 +3,14 @@ import {
   millisToHourMinuteSecond,
 } from "../../util/util";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CardError from "../CardError";
 
 export default function FormDuration(props) {
   const category = props.category;
   const inputName = ["min", "max"];
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
   const [inputs, setInputs] = useState({
     min: {
       hh: 0,
@@ -38,26 +42,27 @@ export default function FormDuration(props) {
     if (millisMin > millisMax) {
       window.alert("Min duration must be less than max duration");
     }
-    console.log(inputs["min"]);
     const data = {
       minDuration: millisMin,
       maxDuration: millisMax,
     };
     console.log(data);
-    fetch("http://localhost:9000/category/" + category.id + "/duration", {
+    fetch("https://api-production-6a5a.up.railway.app/category/" + category.id + "/duration", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
+    }).then((response) => response.json())
       .then((data) => {
-        window.location.href = "/categories";
+        if(data.data){
+          console.log("navigate");
+          window.location.href = "/categories";
+          // navigate("/categories");
+        }else{
+          setError(data.error.message);
+        }
       })
-      .catch((error) => {
-        //TODO implement error
-      });
   };
 
   return (
@@ -117,6 +122,9 @@ export default function FormDuration(props) {
             </div>
           );
         })}
+        <div className="row">
+          <CardError error={error} />
+        </div>
         <div className="row">
           <input
             type="submit"

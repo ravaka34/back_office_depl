@@ -4,7 +4,7 @@ export default function Question(props) {
   const action = props.action;
   const balanceRequest = props.balanceRequest;
 
-  const actionName = action === "3" ? "accept" : "refuse";
+  const actionName = action === "30" ? "accept" : "refuse";
 
   const handleOnClick = () => {
     const data = {
@@ -14,7 +14,7 @@ export default function Question(props) {
       },
     };
     console.log(data);
-    fetch("http://localhost:9000/balance/treat-load-request", {
+    fetch("https://api-production-6a5a.up.railway.app/balance/treat-load-request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,9 @@ export default function Question(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-         window.location.href = "/balance-requests";
+        if(data.data){
+          window.location.href = "/balance-requests";
+        }
       })
       .catch((error) => {
        console.log(error)

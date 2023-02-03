@@ -1,19 +1,24 @@
 import { useState } from "react";
+import CardError from "../CardError";
+import { useNavigate } from "react-router-dom";
 
 export default function FormComissionDuration(props) {
   const category = props.category;
 
   const [comission, setComission] = useState({ value: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     
     e.preventDefault();
     console.log(comission);
+   
     const data = {
       comission: comission
     };
     console.log(data);
-    fetch("http://localhost:9000/category/"+category.id+"/comission", {
+    fetch("https://api-production-6a5a.up.railway.app/category/"+category.id+"/comission", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +27,12 @@ export default function FormComissionDuration(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        window.location.href = "/categories";
+        if(data.data){
+          // navigate("/categories")
+          window.location.href = "/categories";
+        }else{
+          setError(data.error.message);
+        }
       })
       .catch((error) => {
         //TODO implement error
@@ -49,6 +59,9 @@ export default function FormComissionDuration(props) {
             className="col-sm-6"
             id="comission"
           />
+        </div>
+        <div className="row">
+          <CardError error={error} />
         </div>
         <div className="row">
           <button type="submit" className="btn btn-primary">

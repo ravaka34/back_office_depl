@@ -17,7 +17,7 @@ export default function CategoryList() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getDatas(setCategories, "http://localhost:9000/category");
+    getDatas(setCategories, "https://api-production-6a5a.up.railway.app/category");
   }, []);
 
   return (
@@ -41,7 +41,6 @@ export default function CategoryList() {
                     <td>
                       <Link to={"/category/"+category.id}> {category.name} </Link> 
                     </td>
-                    <td>{category.reference}</td>
                     <td>
                       <button
                         type="button"
